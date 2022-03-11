@@ -1,5 +1,10 @@
 package com.labs.integracao.util;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.labs.integracao.domain.Customer;
 import com.labs.integracao.domain.Order;
 import com.labs.integracao.domain.Product;
@@ -26,14 +31,28 @@ public class FileHandler {
                 Customer lineCustomer = getCustomer(line);
                 Order lineOrder = getOrder(line);
                 Product lineProduct = getProduct(line);
+                addToList(lineCustomer, lineOrder, lineProduct);
             }
             br.close();
-
 
         } catch (IOException ex){
             throw ex;
         }
     }
+
+    public void printJSON() throws JsonProcessingException {
+
+         ObjectMapper mapper = new ObjectMapper();
+         mapper.registerModule(new JavaTimeModule());
+         try {
+             String JSON =  mapper.writeValueAsString(Customers);
+             System.out.println(JSON);
+         }
+         catch (JsonGenerationException | JsonMappingException e) {
+             e.printStackTrace();
+         }
+     }
+
 
     public Customer getCustomer(String line){
         return new Customer(getUserIdSubstring(line),getUserNameSubstring(line));
@@ -75,4 +94,23 @@ public class FileHandler {
         return Double.parseDouble(line.substring(ArchiveConfig.VALOR_PRODUTO_INDEX_INICIAL, ArchiveConfig.VALOR_PRODUTO_INDEX_FINAL));
     }
 
+    public void addToList(Customer lineCustomer, Order lineOrder, Product lineProduct){
+
+        for(Customer customer : Customers){
+            if(customer.equals(lineCustomer)){
+                for(Order order : customer.getOrders()){
+                    if(order.equals(lineOrder)){
+                        order.addProduct(lineProduct);
+                        return;
+                    }
+                }
+                lineOrder.addProduct(lineProduct);
+                customer.addOrder(lineOrder);
+                return;
+            }
+        }
+        lineOrder.addProduct(lineProduct);
+        lineCustomer.addOrder(lineOrder);
+        Customers.add(lineCustomer);
+    }
 }

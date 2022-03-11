@@ -1,13 +1,18 @@
 package com.labs.integracao;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.labs.integracao.util.FileHandler;
 
-@SpringBootApplication
+import java.io.IOException;
+
 public class IntegracaoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IntegracaoApplication.class, args);
+	public static void main(String[] args) throws IOException {
+
+		FileHandler fileHandler = new FileHandler();
+
+		fileHandler.readFile();
+		fileHandler.printJSON();
+
 	}
 
 }
