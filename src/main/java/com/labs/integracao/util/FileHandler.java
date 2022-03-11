@@ -12,6 +12,8 @@ import com.labs.integracao.domain.Product;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ public class FileHandler {
 
          ObjectMapper mapper = new ObjectMapper();
          mapper.registerModule(new JavaTimeModule());
+         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+         mapper.setDateFormat(dateFormat);
          try {
              String JSON =  mapper.writeValueAsString(Customers);
              System.out.println(JSON);
