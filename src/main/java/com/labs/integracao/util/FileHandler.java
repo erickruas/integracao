@@ -1,8 +1,5 @@
 package com.labs.integracao.util;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.labs.integracao.domain.Customer;
@@ -11,6 +8,10 @@ import com.labs.integracao.domain.Product;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class FileHandler {
 
     List<Customer> Customers = new ArrayList<>();
 
-    public void readFile() throws IOException {
+    public void readFile(){
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader("C:\\Users\\erick\\Downloads\\data_2.txt"));
@@ -33,12 +34,12 @@ public class FileHandler {
             }
             br.close();
 
-        } catch (IOException ex){
-            throw ex;
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 
-    public void printJSON() throws JsonProcessingException {
+    public void printJSON() {
 
          ObjectMapper mapper = new ObjectMapper();
          mapper.registerModule(new JavaTimeModule());
@@ -47,24 +48,24 @@ public class FileHandler {
          try {
              String JSON =  mapper.writeValueAsString(Customers);
              System.out.println(JSON);
+             Path file = Paths.get("JSON.txt");
+             Files.writeString(file, JSON);
          }
-         catch (JsonGenerationException | JsonMappingException e) {
+         catch (IOException e) {
              e.printStackTrace();
          }
      }
 
-
     private Customer getCustomerFromLine(String line){
         Customer customer = new Customer(getUserIdSubstring(line),getUserNameSubstring(line));
         Order order = new Order(getOrderIdSubstring(line),getDateOrderSubstring(line));
-        Product product = new Product(getProductIdSubstring(line),getValorSubstring(line));
+        Product product = new Product(getProductIdSubstring(line),new BigDecimal(getValorSubstring(line)));
         order.addProduct(product);
         customer.addOrder(order);
         return customer;
     }
 
     private void addToList(Customer lineCustomer){
-
         int customerIndex = getCustomerIndex(lineCustomer);
 
         if(customerIndex == -1){
@@ -94,5 +95,4 @@ public class FileHandler {
     private void addNewProductToOrder(int customerIndex, int orderIndex, Customer lineCustomer){
         Customers.get(customerIndex).getOrders().get(orderIndex).addProduct(lineCustomer.getOrders().get(0).getProducts().get(0));
     }
-
 }

@@ -7,13 +7,13 @@ import java.util.Objects;
 
 public class Customer {
 
-    private Long id_usuario;
-    private String nome;
+    private Long user_id;
+    private String name;
     List<Order> orders;
 
-    public Customer(Long id_usuario, String nome) {
-        this.id_usuario = id_usuario;
-        this.nome = nome;
+    public Customer(Long user_id, String nome) {
+        this.user_id = user_id;
+        this.name = nome;
         this.orders = new ArrayList<>();
     }
 
@@ -21,20 +21,20 @@ public class Customer {
         orders.add(order);
     }
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public Long getUser_id() {
+        return user_id;
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Order> getOrders() {
@@ -50,11 +50,11 @@ public class Customer {
         if (this == o) return true;
         if (!(o instanceof Customer)) return false;
         Customer customer = (Customer) o;
-        return getId_usuario().equals(customer.getId_usuario()) && getNome().equals(customer.getNome());
+        return user_id.equals(customer.user_id) && name.equals(customer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId_usuario(), getNome());
+        return Objects.hash(user_id, name);
     }
 }

@@ -1,30 +1,33 @@
 package com.labs.integracao.domain;
 
+import java.math.BigDecimal;
+
+import static java.math.RoundingMode.HALF_EVEN;
+
 public class Product {
 
-    private Long id_produto;
-    private Double valor_produto;
+    private Long product_id;
+    private BigDecimal value;
 
-    public Product(Long id_produto, Double valor_produto) {
-        this.id_produto = id_produto;
-        this.valor_produto = valor_produto;
+    public Product(Long product_id, BigDecimal value) {
+        this.product_id = product_id;
+        this.value = value.setScale(2, HALF_EVEN);
     }
 
-    public Long getId_produto() {
-        return id_produto;
+    public Long getProduct_id() {
+        return product_id;
     }
 
-    public void setId_produto(Long id_produto) {
-        this.id_produto = id_produto;
+    public void setProduct_id(Long product_id) {
+        this.product_id = product_id;
     }
 
-    public Double getValor_produto() {
-        return valor_produto;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setValor_produto(Double valor_produto) {
-        this.valor_produto = valor_produto;
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
-
 }
 

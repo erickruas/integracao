@@ -1,44 +1,57 @@
 package com.labs.integracao.domain;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.math.BigDecimal.ROUND_HALF_DOWN;
+import static java.math.RoundingMode.HALF_DOWN;
+import static java.math.RoundingMode.HALF_EVEN;
+
 public class Order {
 
-    private Long id_pedido;
-    private LocalDate data_compra;
+    private Long order_id;
+    private BigDecimal total;
+    private LocalDate date;
     private List<Product> products;
-    private Double total;
 
-    public Order(Long id_pedido, LocalDate data_compra) {
-        this.id_pedido = id_pedido;
-        this.data_compra = data_compra;
+    public Order(Long order_id, LocalDate date) {
+        this.order_id = order_id;
+        this.date = date;
         this.products = new ArrayList<>();
-        this.total = 0.00;
+        this.total = BigDecimal.ZERO;
     }
 
     public void addProduct(Product product){
         products.add(product);
-        total = total + product.getValor_produto();
+        total = this.getTotal().add(product.getValue()).setScale(2, HALF_EVEN);
     }
 
-    public Long getId_pedido() {
-        return id_pedido;
+    public Long getOrder_id() {
+        return order_id;
     }
 
-    public void setId_pedido(Long id_pedido) {
-        this.id_pedido = id_pedido;
+    public void setOrder_id(Long order_id) {
+        this.order_id = order_id;
     }
 
-    public LocalDate getData_compra() {
-        return data_compra;
+    public BigDecimal getTotal() {
+        return total;
     }
 
-    public void setData_compra(LocalDate data_compra) {
-        this.data_compra = data_compra;
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public List<Product> getProducts() {
@@ -49,24 +62,16 @@ public class Order {
         this.products = products;
     }
 
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Order)) return false;
         Order order = (Order) o;
-        return Objects.equals(getId_pedido(), order.getId_pedido());
+        return order_id.equals(order.order_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId_pedido());
+        return Objects.hash(order_id, getTotal());
     }
 }

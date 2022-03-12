@@ -6,17 +6,11 @@ import java.io.IOException;
 
 public class IntegracaoApplication {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 
 		FileHandler fileHandler = new FileHandler();
-		try{
-			fileHandler.readFile();
-			fileHandler.printJSON();
-		}catch (IOException ex){
-			throw ex;
-		}
-
+		fileHandler.readFile();
+		fileHandler.printJSON();
 
 	}
-
 }
