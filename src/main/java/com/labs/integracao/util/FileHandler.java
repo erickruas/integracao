@@ -8,16 +8,14 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.labs.integracao.domain.Customer;
 import com.labs.integracao.domain.Order;
 import com.labs.integracao.domain.Product;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import static com.labs.integracao.util.Substrings.*;
 
 public class FileHandler {
 
@@ -30,10 +28,8 @@ public class FileHandler {
             String line;
 
             while((line = br.readLine()) != null) {
-                Customer lineCustomer = getCustomer(line);
-                Order lineOrder = getOrder(line);
-                Product lineProduct = getProduct(line);
-                addToList(lineCustomer, lineOrder, lineProduct);
+                Customer lineCustomer = getCustomerFromLine(line);
+                addToList(lineCustomer);
             }
             br.close();
 
@@ -58,63 +54,45 @@ public class FileHandler {
      }
 
 
-    public Customer getCustomer(String line){
-        return new Customer(getUserIdSubstring(line),getUserNameSubstring(line));
+    private Customer getCustomerFromLine(String line){
+        Customer customer = new Customer(getUserIdSubstring(line),getUserNameSubstring(line));
+        Order order = new Order(getOrderIdSubstring(line),getDateOrderSubstring(line));
+        Product product = new Product(getProductIdSubstring(line),getValorSubstring(line));
+        order.addProduct(product);
+        customer.addOrder(order);
+        return customer;
     }
 
-    public Order getOrder(String line){
-        return new Order(getOrderIdSubstring(line),getDateOrderSubstring(line));
-    }
+    private void addToList(Customer lineCustomer){
 
-    public Product getProduct(String line){
-        Product product = new Product();
-        product.setId_produto(getProductIdSubstring(line));
-        product.setValor_produto(getValorSubstring(line));
-        return product;
-    }
+        int customerIndex = getCustomerIndex(lineCustomer);
 
-    public Long getUserIdSubstring(String line){
-        return Long.parseLong(line.substring(ArchiveConfig.ID_USUARIO_INDEX_INICIAL, ArchiveConfig.ID_USUARIO_INDEX_FINAL));
-    }
-
-    public String getUserNameSubstring(String line){
-        return line.substring(ArchiveConfig.NOME_INDEX_INICIAL, ArchiveConfig.NOME_INDEX_FINAL).trim();
-    }
-
-    public Long getOrderIdSubstring(String line){
-        return Long.parseLong(line.substring(ArchiveConfig.ID_PEDIDO_INDEX_INICIAL, ArchiveConfig.ID_PEDIDO_INDEX_FINAL));
-    }
-
-    public LocalDate getDateOrderSubstring(String line){
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
-        return LocalDate.parse(line.substring(ArchiveConfig.DATA_COMPRA_INDEX_INICIAL, ArchiveConfig.DATA_COMPRA_INDEX_FINAL), format);
-    }
-
-    public Long getProductIdSubstring(String line){
-        return Long.parseLong(line.substring(ArchiveConfig.ID_PRODUTO_INDEX_INICIAL, ArchiveConfig.ID_PRODUTO_INDEX_FINAL));
-    }
-
-    public Double getValorSubstring(String line){
-        return Double.parseDouble(line.substring(ArchiveConfig.VALOR_PRODUTO_INDEX_INICIAL, ArchiveConfig.VALOR_PRODUTO_INDEX_FINAL));
-    }
-
-    public void addToList(Customer lineCustomer, Order lineOrder, Product lineProduct){
-
-        for(Customer customer : Customers){
-            if(customer.equals(lineCustomer)){
-                for(Order order : customer.getOrders()){
-                    if(order.equals(lineOrder)){
-                        order.addProduct(lineProduct);
-                        return;
-                    }
-                }
-                lineOrder.addProduct(lineProduct);
-                customer.addOrder(lineOrder);
-                return;
+        if(customerIndex == -1){
+            Customers.add(lineCustomer);
+        } else {
+            int orderIndex = getOrderIndex(lineCustomer);
+            if(orderIndex == -1){
+                addNewOrder(customerIndex, lineCustomer);
+            } else {
+                addNewProductToOrder(customerIndex, orderIndex, lineCustomer);
             }
         }
-        lineOrder.addProduct(lineProduct);
-        lineCustomer.addOrder(lineOrder);
-        Customers.add(lineCustomer);
     }
+
+    private int getCustomerIndex(Customer lineCustomer){
+        return Customers.indexOf(lineCustomer);
+    }
+
+    private int getOrderIndex(Customer lineCustomer){
+        return Customers.get(getCustomerIndex(lineCustomer)).getOrders().indexOf(lineCustomer.getOrders().get(0));
+    }
+
+    private void addNewOrder(int customerIndex, Customer lineCustomer){
+        Customers.get(customerIndex).addOrder(lineCustomer.getOrders().get(0));
+    }
+
+    private void addNewProductToOrder(int customerIndex, int orderIndex, Customer lineCustomer){
+        Customers.get(customerIndex).getOrders().get(orderIndex).addProduct(lineCustomer.getOrders().get(0).getProducts().get(0));
+    }
+
 }

@@ -5,6 +5,11 @@ public class Product {
     private Long id_produto;
     private Double valor_produto;
 
+    public Product(Long id_produto, Double valor_produto) {
+        this.id_produto = id_produto;
+        this.valor_produto = valor_produto;
+    }
+
     public Long getId_produto() {
         return id_produto;
     }
@@ -20,5 +25,6 @@ public class Product {
     public void setValor_produto(Double valor_produto) {
         this.valor_produto = valor_produto;
     }
+
 }
 

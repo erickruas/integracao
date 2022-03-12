@@ -9,9 +9,13 @@ public class IntegracaoApplication {
 	public static void main(String[] args) throws IOException {
 
 		FileHandler fileHandler = new FileHandler();
+		try{
+			fileHandler.readFile();
+			fileHandler.printJSON();
+		}catch (IOException ex){
+			throw ex;
+		}
 
-		fileHandler.readFile();
-		fileHandler.printJSON();
 
 	}
 
