@@ -1,14 +1,11 @@
 package com.labs.integracao.domain;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static java.math.BigDecimal.ROUND_HALF_DOWN;
-import static java.math.RoundingMode.HALF_DOWN;
 import static java.math.RoundingMode.HALF_EVEN;
 
 public class Order {
