@@ -10,6 +10,8 @@ import static java.math.RoundingMode.HALF_EVEN;
 
 public class Order {
 
+    //Entidade de dominio Order, que é uma lista dentro do Customer, já que um Customer pode ter varias Orders.
+
     private Long order_id;
     private BigDecimal total;
     private LocalDate date;

@@ -8,7 +8,7 @@ public class IntegracaoApplication {
 
 		FileHandler fileHandler = new FileHandler();
 		fileHandler.readFile();
-		fileHandler.printJSON();
+		fileHandler.writeFile();
 
 	}
 }

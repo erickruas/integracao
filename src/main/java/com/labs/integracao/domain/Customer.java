@@ -6,13 +6,15 @@ import java.util.Objects;
 
 public class Customer {
 
+    //Entidade de dominio Customer, feita para atender o processamento dos dados de acordo com o formato JSON.
+
     private Long user_id;
     private String name;
     List<Order> orders;
 
-    public Customer(Long user_id, String nome) {
+    public Customer(Long user_id, String name) {
         this.user_id = user_id;
-        this.name = nome;
+        this.name = name;
         this.orders = new ArrayList<>();
     }
 

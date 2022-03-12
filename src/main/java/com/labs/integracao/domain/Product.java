@@ -6,6 +6,8 @@ import static java.math.RoundingMode.HALF_EVEN;
 
 public class Product {
 
+    //Entidade de dominio Product, que é uma lista dentro da Order, já que um Order pode ter varios Products.
+
     private Long product_id;
     private BigDecimal value;
 
