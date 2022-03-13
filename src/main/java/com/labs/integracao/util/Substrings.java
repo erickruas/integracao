@@ -1,5 +1,6 @@
 package com.labs.integracao.util;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -9,7 +10,11 @@ public class Substrings {
     da classe FileHandler mais limpo e organizado. */
 
     public static Long getUserIdSubstring(String line){
-        return Long.parseLong(line.substring(ArchiveConfig.USER_ID_BEGIN_INDEX, ArchiveConfig.USER_ID_END_INDEX));
+        try {
+            return Long.parseLong(line.substring(ArchiveConfig.USER_ID_BEGIN_INDEX, ArchiveConfig.USER_ID_END_INDEX));
+        }catch (NumberFormatException exception){
+            throw exception;
+        }
     }
 
     public static String getUserNameSubstring(String line){
@@ -17,20 +22,36 @@ public class Substrings {
     }
 
     public static Long getOrderIdSubstring(String line){
-        return Long.parseLong(line.substring(ArchiveConfig.ORDER_ID_BEGIN_INDEX, ArchiveConfig.ORDER_ID_END_INDEX));
+        try{
+            return Long.parseLong(line.substring(ArchiveConfig.ORDER_ID_BEGIN_INDEX, ArchiveConfig.ORDER_ID_END_INDEX));
+        }catch (NumberFormatException exception){
+            throw exception;
+        }
     }
 
     public static LocalDate getDateOrderSubstring(String line){
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
-        return LocalDate.parse(line.substring(ArchiveConfig.DATE_BEGIN_INDEX, ArchiveConfig.DATE_END_INDEX), format);
+        try{
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+            return LocalDate.parse(line.substring(ArchiveConfig.DATE_BEGIN_INDEX, ArchiveConfig.DATE_END_INDEX), format);
+        } catch (DateTimeException exception) {
+            throw exception;
+        }
     }
 
     public static Long getProductIdSubstring(String line){
-        return Long.parseLong(line.substring(ArchiveConfig.PRODUCT_ID_BEGIN_INDEX, ArchiveConfig.PRODUCT_ID_END_INDEX));
+        try {
+            return Long.parseLong(line.substring(ArchiveConfig.PRODUCT_ID_BEGIN_INDEX, ArchiveConfig.PRODUCT_ID_END_INDEX));
+        }catch (NumberFormatException exception){
+            throw exception;
+        }
     }
 
     public static Double getValorSubstring(String line){
-        return Double.parseDouble(line.substring(ArchiveConfig.VALUE_BEGIN_INDEX, ArchiveConfig.VALUE_END_INDEX));
+        try{
+            return Double.parseDouble(line.substring(ArchiveConfig.VALUE_BEGIN_INDEX, ArchiveConfig.VALUE_END_INDEX));
+        } catch (NumberFormatException exception){
+            throw exception;
+        }
     }
 
 }
