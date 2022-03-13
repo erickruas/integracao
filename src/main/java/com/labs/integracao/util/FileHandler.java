@@ -31,11 +31,11 @@ public class FileHandler {
     */
     List<Customer> Customers = new ArrayList<>();
 
-    public void readFile() {
+    public void readFile(String readFileName) {
 
         try {
             BufferedReader br = new BufferedReader(
-                    new FileReader("data_1.txt"));
+                    new FileReader(readFileName));
             String line;
             int indexLine = 1;
             while ((line = br.readLine()) != null) {
@@ -59,14 +59,14 @@ public class FileHandler {
         }
     }
 
-    public void writeFile() {
+    public void writeFile(String writeFileName) {
 
          ObjectMapper mapper = new ObjectMapper();
          mapper.registerModule(new JavaTimeModule());
          DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
          mapper.setDateFormat(dateFormat);
          try {
-             mapper.writeValue(new File("result.json"), Customers);
+             mapper.writeValue(new File(writeFileName), Customers);
          }
          catch (IOException e) {
              e.printStackTrace();
@@ -78,7 +78,7 @@ public class FileHandler {
         try{
             Customer customer = new Customer(getUserIdSubstring(line),getUserNameSubstring(line));
             Order order = new Order(getOrderIdSubstring(line),getDateOrderSubstring(line));
-            Product product = new Product(getProductIdSubstring(line),new BigDecimal(getValorSubstring(line)));
+            Product product = new Product(getProductIdSubstring(line),new BigDecimal(getValueSubstring(line)));
             order.addProduct(product);
             customer.addOrder(order);
             return customer;

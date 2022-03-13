@@ -3,6 +3,7 @@ package com.labs.integracao.util;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Substrings {
 
@@ -33,7 +34,7 @@ public class Substrings {
         try{
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
             return LocalDate.parse(line.substring(ArchiveConfig.DATE_BEGIN_INDEX, ArchiveConfig.DATE_END_INDEX), format);
-        } catch (DateTimeException exception) {
+        } catch (DateTimeParseException exception) {
             throw exception;
         }
     }
@@ -46,7 +47,7 @@ public class Substrings {
         }
     }
 
-    public static Double getValorSubstring(String line){
+    public static Double getValueSubstring(String line){
         try{
             return Double.parseDouble(line.substring(ArchiveConfig.VALUE_BEGIN_INDEX, ArchiveConfig.VALUE_END_INDEX));
         } catch (NumberFormatException exception){

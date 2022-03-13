@@ -7,8 +7,8 @@ public class IntegracaoApplication {
 	public static void main(String[] args) {
 
 		FileHandler fileHandler = new FileHandler();
-		fileHandler.readFile();
-		fileHandler.writeFile();
+		fileHandler.readFile("data_1.txt");
+		fileHandler.writeFile("data_1.json");
 
 	}
 }
