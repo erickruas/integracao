@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ListSorter {
 
-    public List<Customer> SortIntoList(List<Customer> customersList, Customer lineCustomer, Order lineOrder, Product lineProduct) {
+    public List<Customer> sortIntoList(List<Customer> customersList, Customer lineCustomer, Order lineOrder, Product lineProduct) {
 
         int customerIndex = customersList.indexOf(lineCustomer);
 
@@ -23,8 +23,6 @@ public class ListSorter {
                 customersList.get(customerIndex).getOrders().get(orderIndex).addProduct(lineProduct);
             }
         }
-
         return customersList;
-
     }
 }

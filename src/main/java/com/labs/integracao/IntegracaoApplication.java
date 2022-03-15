@@ -31,7 +31,7 @@ public class IntegracaoApplication {
                     Customer lineCustomer = ReadParametersFromLine.getCustomerFromLine(line);
                     Order lineOrder = ReadParametersFromLine.getOrderFromLine(line);
                     Product lineProduct = ReadParametersFromLine.getProductFromLine(line);
-                    customerList = listSorter.SortIntoList(customerList, lineCustomer, lineOrder, lineProduct);
+                    customerList = listSorter.sortIntoList(customerList, lineCustomer, lineOrder, lineProduct);
                 } else {
                     System.out.print("Invalid line.");
                 }

@@ -60,10 +60,9 @@ public class ReadParametersFromLine {
 
         try {
             return new Customer(getUserId(line), getUserName(line));
-        } catch (NumberFormatException | DateTimeParseException exception) {
-            exception.printStackTrace();
+        } catch (NumberFormatException exception) {
+            throw exception;
         }
-        return null;
     }
 
     public static Order getOrderFromLine(String line) {
@@ -71,19 +70,17 @@ public class ReadParametersFromLine {
         try {
             return new Order(getOrderId(line), getOrderDate(line));
         } catch (NumberFormatException | DateTimeParseException exception) {
-            exception.printStackTrace();
+            throw exception;
         }
-        return null;
     }
 
     public static Product getProductFromLine(String line) {
 
         try {
             return new Product(getProductId(line), BigDecimal.valueOf(getProductValue(line)));
-        } catch (NumberFormatException | DateTimeParseException exception) {
-            exception.printStackTrace();
+        } catch (NumberFormatException exception) {
+            throw exception;
         }
-        return null;
     }
 
     public static boolean isAValidLine(String line) {
