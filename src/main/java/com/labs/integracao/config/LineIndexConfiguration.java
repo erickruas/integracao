@@ -1,8 +1,6 @@
-package com.labs.integracao.util;
+package com.labs.integracao.config;
 
-public class ArchiveConfig {
-
-    //Esta classe guarda as configurações utilizadas para a leitura das propriedades que estão contidas no arquivo.
+public class LineIndexConfiguration {
 
     public static final int USER_ID_BEGIN_INDEX = 0;
     public static final int USER_ID_END_INDEX = 10;
@@ -16,5 +14,6 @@ public class ArchiveConfig {
     public static final int PRODUCT_ID_END_INDEX = 75;
     public static final int VALUE_BEGIN_INDEX = 75;
     public static final int VALUE_END_INDEX = 87;
+    public static final int LINE_LENGHT = 95;
 
 }

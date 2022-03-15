@@ -10,31 +10,38 @@ import static java.math.RoundingMode.HALF_EVEN;
 
 public class Order {
 
-    //Entidade de dominio Order, que é uma lista dentro do Customer, já que um Customer pode ter varias Orders.
-
-    private Long order_id;
+    private final Long orderId;
     private BigDecimal total;
     private LocalDate date;
     private List<Product> products;
 
-    public Order(Long order_id, LocalDate date) {
-        this.order_id = order_id;
+    public Order(Long orderId, LocalDate date) {
+        this.orderId = orderId;
         this.date = date;
         this.products = new ArrayList<>();
         this.total = BigDecimal.ZERO;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         products.add(product);
         total = this.getTotal().add(product.getValue()).setScale(2, HALF_EVEN);
     }
 
-    public Long getOrder_id() {
-        return order_id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return orderId.equals(order.orderId);
     }
 
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId, getTotal());
+    }
+
+    public Long getOrderId() {
+        return orderId;
     }
 
     public BigDecimal getTotal() {
@@ -59,18 +66,5 @@ public class Order {
 
     public void setProducts(List<Product> products) {
         this.products = products;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return order_id.equals(order.order_id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(order_id, getTotal());
     }
 }

@@ -6,22 +6,16 @@ import static java.math.RoundingMode.HALF_EVEN;
 
 public class Product {
 
-    //Entidade de dominio Product, que é uma lista dentro da Order, já que um Order pode ter varios Products.
-
-    private Long product_id;
+    private final Long productId;
     private BigDecimal value;
 
-    public Product(Long product_id, BigDecimal value) {
-        this.product_id = product_id;
+    public Product(Long productId, BigDecimal value) {
+        this.productId = productId;
         this.value = value.setScale(2, HALF_EVEN);
     }
 
-    public Long getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
+    public Long getProductId() {
+        return productId;
     }
 
     public BigDecimal getValue() {
@@ -32,4 +26,3 @@ public class Product {
         this.value = value;
     }
 }
-

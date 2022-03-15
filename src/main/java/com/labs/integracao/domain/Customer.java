@@ -6,36 +6,19 @@ import java.util.Objects;
 
 public class Customer {
 
-    //Entidade de dominio Customer, feita para atender o processamento dos dados de acordo com o formato JSON.
+    private final Long userId;
+    private final String name;
+    private List<Order> orders;
 
-    private Long user_id;
-    private String name;
-    List<Order> orders;
-
-    public Customer(Long user_id, String name) {
-        this.user_id = user_id;
+    public Customer(Long userId, String name) {
+        this.userId = userId;
         this.name = name;
         this.orders = new ArrayList<>();
     }
 
-    public void addOrder(Order order){
+    public void addOrderAndProduct(Order order, Product product) {
+        order.addProduct(product);
         orders.add(order);
-    }
-
-    public Long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<Order> getOrders() {
@@ -51,11 +34,11 @@ public class Customer {
         if (this == o) return true;
         if (!(o instanceof Customer)) return false;
         Customer customer = (Customer) o;
-        return user_id.equals(customer.user_id) && name.equals(customer.name);
+        return userId.equals(customer.userId) && name.equals(customer.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, name);
+        return Objects.hash(userId, name);
     }
 }
