@@ -23,13 +23,13 @@ public class IntegracaoApplication {
         SpringApplication.run(IntegracaoApplication.class, args);
     } {
 
-        File file = new File("/root/app/files/");
+        File files = new File("/root/app/files/");
 
-        Arrays.stream(file.listFiles())
-                .filter(f -> f.isFile())
-                .forEach(f -> {
+        Arrays.stream(files.listFiles())
+                .filter(file -> file.isFile())
+                .forEach(file -> {
                     ArchiveReader archiveReader = new ArchiveReader();
-                    BufferedReader br = archiveReader.readFile(f.getPath());
+                    BufferedReader br = archiveReader.readFile(file.getPath());
 
                     LineTreatment lineTreatment = new LineTreatment();
                     List<Customer> customerList = lineTreatment.readLinesFromBr(br);
@@ -43,7 +43,7 @@ public class IntegracaoApplication {
 
                         try {
                             objectMapper.writeValue(new File(output), customerList);
-                            System.out.print("JSON created. FileName = " + f.getName() + output);
+                            System.out.print("JSON created. FileName = " + file.getName() + output);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
