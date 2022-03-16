@@ -23,12 +23,12 @@ JACKSON
 ## INSTRUÇÕES PARA CONFIGURAR O AMBIENTE E EXECUTAR OS TESTES
 
  - Faça o download/clone do repositório do GitHub para a sua máquina.
- - Na raiz do projeto, abra o arquivo .env e configure a pasta que será utilizada para a entrada e saida de arquivos. (Passo não necessário quando rodar em máquinas com SO Windows)
+ - Na raiz do projeto, abra o arquivo .env e configure a pasta que será utilizada para a entrada e saida de arquivos atraves da variavel HOST_INPUT_OUTPUT_FOLDER. (Passo não necessário quando rodar em máquinas com SO Windows)
  - O sistema lê um arquivo de input por vez, por tanto insira na pasta selecionada o arquivo de entrada com o nome input.txt.
  - Abra o terminal na raiz do projeto e execute o comando : mvn clean package -e OU mvnw clean package -e.
  - Ainda no terminal, execute o comando docker-compose up -d para subir o container do sistema.
  - Será gerado um output com os dados em json na pasta configurada na variavel de ambiente.
- - Caso queira converter um novo arquivo, basta inserir colocar um novo arquivo na pasta e rodar o comando docker start integracao_app_1 no terminal.
+ - Caso queira converter um novo arquivo, basta inseri-lona pasta e rodar o comando docker start integracao_app_1 no terminal.
 
 
 
