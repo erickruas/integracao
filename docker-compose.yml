@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./src/main/docker/Dockerfile
+    restart: on-failure
+    ports:
+      - 8080:8080
+    volumes:
+      - ${HOST_INPUT_OUTPUT_FOLDER}:/root/app/files

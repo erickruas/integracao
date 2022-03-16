@@ -41,4 +41,13 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(userId, name);
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }
