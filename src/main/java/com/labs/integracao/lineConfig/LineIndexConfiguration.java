@@ -1,4 +1,4 @@
-package com.labs.integracao.config;
+package com.labs.integracao.lineConfig;
 
 public class LineIndexConfiguration {
 

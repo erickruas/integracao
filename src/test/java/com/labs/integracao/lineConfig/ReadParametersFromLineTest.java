@@ -1,4 +1,4 @@
-package com.labs.integracao.config;
+package com.labs.integracao.lineConfig;
 
 import com.labs.integracao.domain.Customer;
 import com.labs.integracao.domain.Order;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static com.labs.integracao.config.ReadParametersFromLine.*;
+import static com.labs.integracao.lineConfig.ReadParametersFromLine.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadParametersFromLineTest {

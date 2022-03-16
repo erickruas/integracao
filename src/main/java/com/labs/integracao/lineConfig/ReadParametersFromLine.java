@@ -1,4 +1,4 @@
-package com.labs.integracao.config;
+package com.labs.integracao.lineConfig;
 
 import com.labs.integracao.domain.Customer;
 import com.labs.integracao.domain.Order;

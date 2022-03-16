@@ -1,5 +1,7 @@
 package com.labs.integracao.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,9 +12,13 @@ import static java.math.RoundingMode.HALF_EVEN;
 
 public class Order {
 
+    @JsonProperty("order_id")
     private final Long orderId;
+    @JsonProperty("total")
     private BigDecimal total;
+    @JsonProperty("date")
     private LocalDate date;
+    @JsonProperty("products")
     private List<Product> products;
 
     public Order(Long orderId, LocalDate date) {

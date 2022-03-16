@@ -1,7 +1,7 @@
 package com.labs.integracao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.labs.integracao.config.LineTreatment;
+import com.labs.integracao.lineConfig.LineTreatment;
 import com.labs.integracao.domain.Customer;
 import com.labs.integracao.file.ArchiveReader;
 import com.labs.integracao.file.JsonParser;
@@ -37,6 +37,7 @@ public class IntegracaoApplication {
 
             try {
                 objectMapper.writeValue(new File(output), customerList);
+                System.out.print("JSON created. FileName = " + output);
             } catch (IOException e) {
                 e.printStackTrace();
             }

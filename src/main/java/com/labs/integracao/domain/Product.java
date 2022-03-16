@@ -1,12 +1,16 @@
 package com.labs.integracao.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
 import static java.math.RoundingMode.HALF_EVEN;
 
 public class Product {
 
+    @JsonProperty("product_id")
     private final Long productId;
+    @JsonProperty("value")
     private BigDecimal value;
 
     public Product(Long productId, BigDecimal value) {

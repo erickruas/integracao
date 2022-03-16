@@ -1,13 +1,18 @@
 package com.labs.integracao.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Customer {
 
+    @JsonProperty("user_id")
     private final Long userId;
+    @JsonProperty("name")
     private final String name;
+    @JsonProperty("orders")
     private List<Order> orders;
 
     public Customer(Long userId, String name) {
