@@ -4,7 +4,7 @@
 
 Temos uma demanda para integrar dois sistemas. O sistema legado que possui um arquivo
 de pedidos desnormalizado, precisamos transformá-lo em um arquivo json normalizado. E
-para isso precisamos satisfazer alguns requisitos .Faça um sistema que receba um arquivo ou diretório e processe-os para o novo formato.
+para isso precisamos satisfazer alguns requisitos.Faça um sistema que receba um arquivo ou diretório e processe-os para o novo formato.
 
 ## TECNOLOGIAS, PADRÕES E DEPENDENCIAS UTILIZADAS
 
@@ -24,11 +24,10 @@ JACKSON
 
  - Faça o download/clone do repositório do GitHub para a sua máquina.
  - Na raiz do projeto, abra o arquivo .env e configure a pasta que será utilizada para a entrada e saida de arquivos atraves da variavel HOST_INPUT_OUTPUT_FOLDER. (Passo não necessário quando rodar em máquinas com SO Windows)
- - O sistema lê um arquivo de input por vez, por tanto insira na pasta selecionada o arquivo de entrada com o nome input.txt.
+ - Insira os arquivos de input dentro da pasta. (Caso for Windows, e não for alterado o HOST_INPUT_OUTPUT_FOLDER, dentro da pasta terá dois arquivos de input)
  - Abra o terminal na raiz do projeto e execute o comando : mvn clean package -e OU mvnw clean package -e.
  - Ainda no terminal, execute o comando docker-compose up -d para subir o container do sistema.
- - Será gerado um output com os dados em json na pasta configurada na variavel de ambiente.
- - Caso queira converter um novo arquivo, basta inseri-lona pasta e rodar o comando docker start integracao_app_1 no terminal.
+ - O sistema processará todos arquivos txt do diretório configurado e criará os JSON correspondentes no mesmo local.
 
 
 
