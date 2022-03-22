@@ -15,10 +15,14 @@ public class Customer {
     @JsonProperty("orders")
     private List<Order> orders;
 
-    public Customer(Long userId, String name) {
+    private Customer(Long userId, String name) {
         this.userId = userId;
         this.name = name;
         this.orders = new ArrayList<>();
+    }
+
+    public static Customer createCustomer(Long userId, String name) {
+        return new Customer(userId, name);
     }
 
     public void addOrderAndProduct(Order order, Product product) {

@@ -19,22 +19,22 @@ class ListSorterTest {
     ListSorter listSorter = new ListSorter();
 
     @Mock
-    Customer customerA = new Customer(1L, "customerA");
+    Customer customerA = Customer.createCustomer(1L, "customerA");
 
     @Mock
-    Customer customerB = new Customer(2L, "customerB");
+    Customer customerB = Customer.createCustomer(2L, "customerB");
 
     @Mock
-    Order order1 = new Order(1L, LocalDate.now());
+    Order order1 = Order.createOrder(1L, LocalDate.now());
 
     @Mock
-    Order order2 = new Order(2L, LocalDate.now());
+    Order order2 = Order.createOrder(2L, LocalDate.now());
 
     @Mock
-    Product productA = new Product(1L, new BigDecimal("100.00"));
+    Product productA = Product.createProduct(1L, new BigDecimal("100.00"));
 
     @Mock
-    Product productB = new Product(2L, new BigDecimal("100.00"));
+    Product productB = Product.createProduct(2L, new BigDecimal("100.00"));
 
     @Mock
     List<Customer> customerList = new ArrayList<>();

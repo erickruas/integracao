@@ -10,19 +10,21 @@ public class ListSorter {
 
     public List<Customer> sortIntoList(List<Customer> customersList, Customer lineCustomer, Order lineOrder, Product lineProduct) {
 
-        int customerIndex = customersList.indexOf(lineCustomer);
+        List<Customer> list = customersList;
+
+        int customerIndex = list.indexOf(lineCustomer);
 
         if (customerIndex == -1) {
             lineCustomer.addOrderAndProduct(lineOrder, lineProduct);
-            customersList.add(lineCustomer);
+            list.add(lineCustomer);
         } else {
-            int orderIndex = customersList.get(customerIndex).getOrders().indexOf(lineOrder);
+            int orderIndex = list.get(customerIndex).getOrders().indexOf(lineOrder);
             if (orderIndex == -1) {
-                customersList.get(customerIndex).addOrderAndProduct(lineOrder, lineProduct);
+                list.get(customerIndex).addOrderAndProduct(lineOrder, lineProduct);
             } else {
-                customersList.get(customerIndex).getOrders().get(orderIndex).addProduct(lineProduct);
+                list.get(customerIndex).getOrders().get(orderIndex).addProduct(lineProduct);
             }
         }
-        return customersList;
+        return list;
     }
 }

@@ -21,11 +21,15 @@ public class Order {
     @JsonProperty("products")
     private List<Product> products;
 
-    public Order(Long orderId, LocalDate date) {
+    private Order(Long orderId, LocalDate date) {
         this.orderId = orderId;
         this.date = date;
         this.products = new ArrayList<>();
         this.total = BigDecimal.ZERO;
+    }
+
+    public static Order createOrder(Long orderId, LocalDate date) {
+        return new Order(orderId, date);
     }
 
     public void addProduct(Product product) {

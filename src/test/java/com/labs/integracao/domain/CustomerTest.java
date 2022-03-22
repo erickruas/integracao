@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CustomerTest {
 
     @Mock
-    Customer customerA = new Customer(1L, "customerA");
+    Customer customerA = Customer.createCustomer(1L, "customerA");
 
     @Mock
-    Order order1 = new Order(2L, LocalDate.now());
+    Order order1 = Order.createOrder(2L, LocalDate.now());
 
     @Mock
-    Product productA = new Product(1L, new BigDecimal("100.00"));
+    Product productA = Product.createProduct(1L, new BigDecimal("100.00"));
 
     @Test
     void itShouldAddAOrderAndAProductOrderTest() {

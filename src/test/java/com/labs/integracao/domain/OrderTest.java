@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderTest {
 
     @Mock
-    Order order1 = new Order(2L, LocalDate.now());
+    Order order1 = Order.createOrder(2L, LocalDate.now());
 
     @Mock
-    Product productA = new Product(1L, new BigDecimal("100.00"));
+    Product productA = Product.createProduct(1L, new BigDecimal("100.00"));
 
     @Test
     void itShouldAddAProduct() {

@@ -59,7 +59,7 @@ public class ReadParametersFromLine {
     public static Customer getCustomerFromLine(String line) {
 
         try {
-            return new Customer(getUserId(line), getUserName(line));
+            return Customer.createCustomer(getUserId(line), getUserName(line));
         } catch (NumberFormatException exception) {
             throw exception;
         }
@@ -68,7 +68,7 @@ public class ReadParametersFromLine {
     public static Order getOrderFromLine(String line) {
 
         try {
-            return new Order(getOrderId(line), getOrderDate(line));
+            return Order.createOrder(getOrderId(line), getOrderDate(line));
         } catch (NumberFormatException | DateTimeParseException exception) {
             throw exception;
         }
@@ -77,7 +77,7 @@ public class ReadParametersFromLine {
     public static Product getProductFromLine(String line) {
 
         try {
-            return new Product(getProductId(line), BigDecimal.valueOf(getProductValue(line)));
+            return Product.createProduct(getProductId(line), BigDecimal.valueOf(getProductValue(line)));
         } catch (NumberFormatException exception) {
             throw exception;
         }

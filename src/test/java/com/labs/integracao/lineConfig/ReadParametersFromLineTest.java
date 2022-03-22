@@ -21,13 +21,13 @@ class ReadParametersFromLineTest {
     String validLine = "0000000070                              Palmer Prosacco00000007530000000003     1836.7420210308";
 
     @Mock
-    Customer underTestCustomer = new Customer(70L,"Palmer Prosacco");
+    Customer underTestCustomer = Customer.createCustomer(70L,"Palmer Prosacco");
 
     @Mock
-    Order underTestOrder = new Order(753L,LocalDate.now());
+    Order underTestOrder = Order.createOrder(753L,LocalDate.now());
 
     @Mock
-    Product underTesteProduct = new Product(3L, new BigDecimal(1836.74).setScale(2, RoundingMode.HALF_EVEN));
+    Product underTesteProduct = Product.createProduct(3L, new BigDecimal(1836.74).setScale(2, RoundingMode.HALF_EVEN));
 
     @Test
     void itShouldGetUserIdFromLine() {

@@ -13,9 +13,13 @@ public class Product {
     @JsonProperty("value")
     private BigDecimal value;
 
-    public Product(Long productId, BigDecimal value) {
+    private Product(Long productId, BigDecimal value) {
         this.productId = productId;
         this.value = value.setScale(2, HALF_EVEN);
+    }
+
+    public static Product createProduct(Long productId, BigDecimal value) {
+        return new Product(productId, value);
     }
 
     public Long getProductId() {
