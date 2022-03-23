@@ -4,39 +4,30 @@ import com.labs.integracao.domain.Customer;
 import com.labs.integracao.domain.Order;
 import com.labs.integracao.domain.Product;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListSorterTest {
 
-    @Mock
     ListSorter listSorter = new ListSorter();
 
-    @Mock
     Customer customerA = Customer.createCustomer(1L, "customerA");
 
-    @Mock
     Customer customerB = Customer.createCustomer(2L, "customerB");
 
-    @Mock
     Order order1 = Order.createOrder(1L, LocalDate.now());
 
-    @Mock
     Order order2 = Order.createOrder(2L, LocalDate.now());
 
-    @Mock
     Product productA = Product.createProduct(1L, new BigDecimal("100.00"));
 
-    @Mock
     Product productB = Product.createProduct(2L, new BigDecimal("100.00"));
 
-    @Mock
     List<Customer> customerList = new ArrayList<>();
 
     @Test

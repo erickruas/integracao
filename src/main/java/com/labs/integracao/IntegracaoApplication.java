@@ -14,7 +14,7 @@ public class IntegracaoApplication {
         SpringApplication.run(IntegracaoApplication.class, args);
     } {
 
-        File files = new File("/root/app/files/");
+        var files = new File("/root/app/files/");
 
         Arrays.stream(files.listFiles())
                 .forEach(ReadFile::createJson);

@@ -1,7 +1,6 @@
 package com.labs.integracao.domain;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,13 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerTest {
 
-    @Mock
     Customer customerA = Customer.createCustomer(1L, "customerA");
 
-    @Mock
     Order order1 = Order.createOrder(2L, LocalDate.now());
 
-    @Mock
     Product productA = Product.createProduct(1L, new BigDecimal("100.00"));
 
     @Test

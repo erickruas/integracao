@@ -4,7 +4,6 @@ import com.labs.integracao.domain.Customer;
 import com.labs.integracao.domain.Order;
 import com.labs.integracao.domain.Product;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,16 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReadParametersFromLineTest {
 
-    @Mock
     String validLine = "0000000070                              Palmer Prosacco00000007530000000003     1836.7420210308";
 
-    @Mock
     Customer underTestCustomer = Customer.createCustomer(70L,"Palmer Prosacco");
 
-    @Mock
     Order underTestOrder = Order.createOrder(753L,LocalDate.now());
 
-    @Mock
     Product underTesteProduct = Product.createProduct(3L, new BigDecimal(1836.74).setScale(2, RoundingMode.HALF_EVEN));
 
     @Test

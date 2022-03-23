@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 
 public class JsonParser {
 
-    public ObjectMapper configureMapper() {
+    public static ObjectMapper configureMapper() {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());

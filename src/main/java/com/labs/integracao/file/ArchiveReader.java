@@ -6,10 +6,10 @@ import java.io.IOException;
 
 public class ArchiveReader {
 
-    public BufferedReader readFile(String readFileName) {
+    public static BufferedReader readFile(String readFileName) {
 
         try {
-            BufferedReader br = new BufferedReader(
+            var br = new BufferedReader(
                     new FileReader(readFileName));
             return br;
         } catch (IOException e) {

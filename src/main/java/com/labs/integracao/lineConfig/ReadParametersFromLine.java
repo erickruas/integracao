@@ -7,16 +7,11 @@ import com.labs.integracao.domain.Product;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class ReadParametersFromLine {
 
     public static Long getUserId(String line) {
-        try {
-            return Long.parseLong(line.substring(LineIndexConfiguration.USER_ID_BEGIN_INDEX, LineIndexConfiguration.USER_ID_END_INDEX));
-        } catch (NumberFormatException exception) {
-            throw exception;
-        }
+        return Long.parseLong(line.substring(LineIndexConfiguration.USER_ID_BEGIN_INDEX, LineIndexConfiguration.USER_ID_END_INDEX));
     }
 
     public static String getUserName(String line) {
@@ -24,63 +19,32 @@ public class ReadParametersFromLine {
     }
 
     public static Long getOrderId(String line) {
-        try {
-            return Long.parseLong(line.substring(LineIndexConfiguration.ORDER_ID_BEGIN_INDEX, LineIndexConfiguration.ORDER_ID_END_INDEX));
-        } catch (NumberFormatException exception) {
-            throw exception;
-        }
+        return Long.parseLong(line.substring(LineIndexConfiguration.ORDER_ID_BEGIN_INDEX, LineIndexConfiguration.ORDER_ID_END_INDEX));
     }
 
     public static LocalDate getOrderDate(String line) {
-        try {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
-            return LocalDate.parse(line.substring(LineIndexConfiguration.DATE_BEGIN_INDEX, LineIndexConfiguration.DATE_END_INDEX), format);
-        } catch (DateTimeParseException exception) {
-            throw exception;
-        }
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+        return LocalDate.parse(line.substring(LineIndexConfiguration.DATE_BEGIN_INDEX, LineIndexConfiguration.DATE_END_INDEX), format);
     }
 
     public static Long getProductId(String line) {
-        try {
-            return Long.parseLong(line.substring(LineIndexConfiguration.PRODUCT_ID_BEGIN_INDEX, LineIndexConfiguration.PRODUCT_ID_END_INDEX));
-        } catch (NumberFormatException exception) {
-            throw exception;
-        }
+        return Long.parseLong(line.substring(LineIndexConfiguration.PRODUCT_ID_BEGIN_INDEX, LineIndexConfiguration.PRODUCT_ID_END_INDEX));
     }
 
     public static Double getProductValue(String line) {
-        try {
-            return Double.parseDouble(line.substring(LineIndexConfiguration.VALUE_BEGIN_INDEX, LineIndexConfiguration.VALUE_END_INDEX));
-        } catch (NumberFormatException exception) {
-            throw exception;
-        }
+        return Double.parseDouble(line.substring(LineIndexConfiguration.VALUE_BEGIN_INDEX, LineIndexConfiguration.VALUE_END_INDEX));
     }
 
     public static Customer getCustomerFromLine(String line) {
-
-        try {
-            return Customer.createCustomer(getUserId(line), getUserName(line));
-        } catch (NumberFormatException exception) {
-            throw exception;
-        }
+        return Customer.createCustomer(getUserId(line), getUserName(line));
     }
 
     public static Order getOrderFromLine(String line) {
-
-        try {
-            return Order.createOrder(getOrderId(line), getOrderDate(line));
-        } catch (NumberFormatException | DateTimeParseException exception) {
-            throw exception;
-        }
+        return Order.createOrder(getOrderId(line), getOrderDate(line));
     }
 
     public static Product getProductFromLine(String line) {
-
-        try {
-            return Product.createProduct(getProductId(line), BigDecimal.valueOf(getProductValue(line)));
-        } catch (NumberFormatException exception) {
-            throw exception;
-        }
+        return Product.createProduct(getProductId(line), BigDecimal.valueOf(getProductValue(line)));
     }
 
     public static boolean isAValidLine(String line) {
